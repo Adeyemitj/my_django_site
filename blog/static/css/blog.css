@@ -1,0 +1,49 @@
+body{
+background-color: #f5f3f0;
+}
+
+.page-header {
+background-color: #807c73;
+top-margin: 0;
+padding: 20px 20px 20px 40px;
+}
+
+.page-header h1, .page-header a{
+font-size: 46pt;
+text-decoration: none;
+color: #fff;
+}
+
+.container{
+padding-top: 20px;
+}
+
+.content{
+margin-left: 40px;
+}
+.row a{
+text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+font-family: 'Tangerine', 'Inconsolata', 'Droid Sans', serif;
+font-size: 40px;
+}
+
+.date{
+color: #d1cfcb;
+}
+
+.post{
+margin-bottom: 70px;
+border-bottom: .02px solid white;
+}
+
+.post a{
+color: #333;
+}
+
+.post h1 a:visited{
+color: green;
+}
+
