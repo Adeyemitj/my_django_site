@@ -15,7 +15,7 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
 
-    #create a string representation object method
+    # create a string representation object method
     def __str__(self):
         return self.title
 
