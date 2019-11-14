@@ -1,5 +1,6 @@
 body{
 background-color: #f5f3f0;
+font-family: 'Tangerine', 'Inconsolata', 'Droid Sans', serif;
 }
 
 .page-header {
@@ -45,5 +46,14 @@ color: #333;
 
 .post h1 a:visited{
 color: green;
+}
+
+.post-form-blog textarea {
+width: 100%
+
+}
+
+.post-form-blog .btn-info {
+    float: right;
 }
 
