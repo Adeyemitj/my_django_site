@@ -52,8 +52,21 @@ color: green;
 width: 100%
 
 }
+.post-form-blog input {
+width: 50%
+
+}
 
 .post-form-blog .btn-info {
     float: right;
+}
+
+.fa-edit:hover:before{
+content: "edit post";
+}
+
+.col-md-4{
+margin-top:0;
+padding-top:0;
 }
 
