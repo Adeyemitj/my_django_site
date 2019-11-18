@@ -26,7 +26,7 @@ def post_new(request):
         if form.is_valid():   # check if form contents are valid
             post = form.save(commit=False)  # save the new post but not committed to the database
             post.author = request.user      # take the user that login
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()  # save the the database
             return redirect('post_detail', pk=post.pk)  # save the post and redirect to the post detail page
     else:
@@ -44,7 +44,7 @@ def post_edit(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
@@ -52,6 +52,19 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
         stuff_for_frontend = {'form': form}
     return render(request, 'blog/post_edit.html', stuff_for_frontend)
+
+# function to show all drafts post on the post_draft_list.html
+def post_draft_list(request):
+    posts = Post.objects.filter(published_date__isnull=True).order_by('-created_date')
+    stuff_for_frontend ={'posts': posts}
+    return render(request, 'blog/post_draft_list.html', stuff_for_frontend)
+
+# function to publish draft post
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()       # this call the publish function in the model.py
+    return redirect('post_detail', pk=pk)
+
 
 
 
