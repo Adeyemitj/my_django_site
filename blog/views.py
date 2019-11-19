@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
@@ -19,6 +20,7 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', stuff_for_frontend)
 
 # create a function to create new post
+@login_required(login_url='/accounts/login')    # this retricts unauthorize access to the page
 def post_new(request):
     # for form submission. create form, save and redirect to post_detail.html page. (Post request)
     if request.method == 'POST':
@@ -36,6 +38,7 @@ def post_new(request):
         return render(request, 'blog/post_edit.html', stuff_for_frontend)
 
 # create a function to edit post
+@login_required(login_url='/accounts/login')    # this retricts unauthorize access to the page
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
@@ -50,16 +53,18 @@ def post_edit(request, pk):
     else:
         # show post edit form at the frontend
         form = PostForm(instance=post)
-        stuff_for_frontend = {'form': form}
+        stuff_for_frontend = {'form': form, 'post':post}
     return render(request, 'blog/post_edit.html', stuff_for_frontend)
 
 # function to show all drafts post on the post_draft_list.html
+@login_required(login_url='/accounts/login')    # this retricts unauthorize access to the page
 def post_draft_list(request):
     posts = Post.objects.filter(published_date__isnull=True).order_by('-created_date')
     stuff_for_frontend ={'posts': posts}
     return render(request, 'blog/post_draft_list.html', stuff_for_frontend)
 
 # function to publish draft post
+@login_required(login_url='/accounts/login')    # this retricts unauthorize access to the page
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()       # this call the publish function in the model.py

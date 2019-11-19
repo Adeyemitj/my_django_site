@@ -4,6 +4,7 @@ font-family: 'Tangerine', 'Inconsolata', 'Droid Sans', serif;
 }
 
 .page-header {
+
 background-color: #807c73;
 top-margin: 0;
 padding: 20px 20px 20px 40px;
@@ -12,8 +13,35 @@ text-transform: initialize;
 
 .page-header h1, .page-header a{
 font-size: 46pt;
+font-family: Futura;
+background-color: #666666;
 text-decoration: none;
-color: #fff;
+color: #f7fafa;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+background-clip: text;
+text-shadow: -1px -1px rgba(0,0,0,1), 1px 1px
+
+}
+
+.page-header .top_menu{
+float: right;
+padding-right:35px;
+}
+
+.page-header .top_menu .fa-firstdraft, fa-plus-circle, fa-sign-in-alt{
+margin:2px;
+padding:2px;
+}
+
+.home{
+float: right;
+margin-top:-30px;
+
+}
+
+.home .fa-home{
+size: 5px;
 }
 
 .container{
