@@ -12,8 +12,9 @@
                 <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title}}</a></h1>
                 <p>{{ post.text|truncatechars:22|linebreaksbr }}</p>
             </div>
-
+                <hr>
         {% endfor %}
+
     </div>
 <div class="col-md-4">
 <!--    only authenticated user can create new post-->
