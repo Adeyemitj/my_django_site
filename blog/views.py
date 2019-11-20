@@ -10,7 +10,7 @@ from .models import Post, Comment
 
 # create a function to view all posts
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:5]
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:10]
     stuff_for_frontend = {'posts': posts} #creating context value
     return render(request, 'blog/post_list.html', stuff_for_frontend)
 
@@ -91,6 +91,11 @@ def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
     return redirect('post_detail', pk=comment.post.pk)
+
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('post_detail', pk=comment.pk)
 
 
 

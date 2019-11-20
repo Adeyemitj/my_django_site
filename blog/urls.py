@@ -33,4 +33,6 @@ urlpatterns = [
     # mydjangosite.com/comment/2/remove --> online
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
 
+    path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
+
 ]
