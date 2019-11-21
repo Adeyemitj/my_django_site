@@ -71,6 +71,12 @@ def post_publish(request, pk):
     post.publish()       # this call the publish function in the model.py
     return redirect('post_detail', pk=pk)
 
+@login_required(login_url='/accounts/login')    # this retricts unauthorize access to the page
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('/', pk=post.pk)
+
 # function to add comment
 @login_required(login_url='/accounts/login')    # this retricts unauthorize access to the page
 def add_comment_to_post(request, pk):
@@ -99,6 +105,8 @@ def comment_approve(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
     return redirect('post_detail', pk=comment.pk)
+
+
 
 
 

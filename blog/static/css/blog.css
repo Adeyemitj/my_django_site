@@ -94,6 +94,10 @@ width: 50%
 content: "edit post";
 }
 
+.fa-calendar-times:hover:before{
+    content: "remove post"
+}
+
 .col-md-4 a{
 float: right;
 margin-right:5px;
