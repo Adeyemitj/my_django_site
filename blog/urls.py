@@ -39,4 +39,5 @@ urlpatterns = [
 
     path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
 
+    path('signup/', views.signup, name='signup')
 ]

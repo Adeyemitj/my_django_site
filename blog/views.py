@@ -1,8 +1,10 @@
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
-from .form import PostForm, CommentForm
+from .form import PostForm, CommentForm, UserForm
 from .models import Post, Comment
 
 
@@ -11,7 +13,7 @@ from .models import Post, Comment
 # create a function to view all posts
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:10]
-    stuff_for_frontend = {'posts': posts} #creating context value
+    stuff_for_frontend = {'posts': posts}     # creating context value
     return render(request, 'blog/post_list.html', stuff_for_frontend)
 
 # create a function to display post detail
@@ -54,7 +56,7 @@ def post_edit(request, pk):
     else:
         # show post edit form at the frontend
         form = PostForm(instance=post)
-        stuff_for_frontend = {'form': form, 'post':post}
+        stuff_for_frontend = {'form': form, 'post': post}
     return render(request, 'blog/post_edit.html', stuff_for_frontend)
 
 # function to show all drafts post on the post_draft_list.html
@@ -78,7 +80,6 @@ def post_delete(request, pk):
     return redirect('/', pk=post.pk)
 
 # function to add comment
-@login_required(login_url='/accounts/login')    # this retricts unauthorize access to the page
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':    # this check if form method is POST
@@ -106,10 +107,13 @@ def comment_approve(request, pk):
     comment.approve()
     return redirect('post_detail', pk=comment.pk)
 
-
-
-
-
-
-
-
+def signup(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            new_user = User.objects.create_user(**form.cleaned_data)
+            login(request, new_user)
+            return redirect('/')
+    else:
+        form = UserForm()
+    return render(request, 'registration/signup.html', {'form': form})
